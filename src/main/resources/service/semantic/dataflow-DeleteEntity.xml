@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataflow xmlns="http://www.example.org/mml-schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/mml-schema mml-schema.xsd ">
+
+    <input name="id" type="Long" />
+
+    <script outputVar="output">
+        <className>eu.trentorise.smartcampus.services.semantic.impl.ServiceScript</className>
+        <method>delete</method>
+        <variables>
+            <value>id</value>
+        </variables>
+    </script>
+
+</dataflow>

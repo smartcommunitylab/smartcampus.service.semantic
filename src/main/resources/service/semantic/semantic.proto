@@ -1,0 +1,21 @@
+package eu.trentorise.smartcampus.services.semantic.data.message;
+
+message Data {
+    optional string type = 1;
+	optional string name = 2;
+	optional string description = 3;
+    repeated Tag tag = 4;
+    repeated int64 relation = 5;
+}
+
+message Tag {
+    required string name = 1;
+    optional int64 id = 2;
+    optional string description = 3;
+    optional string summary = 4;
+}
+
+message Result {
+    optional int64 id = 1;
+    required bool status = 2; 
+}
