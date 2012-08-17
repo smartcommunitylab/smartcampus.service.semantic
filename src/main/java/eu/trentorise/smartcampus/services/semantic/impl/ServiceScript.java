@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import eu.trentorise.smartcampus.common.Concept;
 import eu.trentorise.smartcampus.common.SemanticHelper;
 import eu.trentorise.smartcampus.services.semantic.data.message.Semantic.Data;
@@ -22,6 +25,8 @@ public class ServiceScript {
 	private static final String KEY_HOST = "host";
 	private static final String KEY_PORT = "port";
 
+	static Log logger = LogFactory.getLog(ServiceScript.class);
+	
 	private static SCWebApiClient client = null;
 	static {
 		Properties props = new Properties();
@@ -31,13 +36,13 @@ public class ServiceScript {
 			Thread.currentThread().setContextClassLoader(SCWebApiClient.class.getClassLoader());
 			client = SCWebApiClient.getInstance(Locale.ENGLISH, props.getProperty(KEY_HOST), Integer.parseInt(props.getProperty(KEY_PORT)));
 		} catch (Throwable e) {
-			e.printStackTrace();
+			logger.error(e);
 			client = SCWebApiClient.getInstance(Locale.ENGLISH,SE_HOST, SE_PORT);
 		}
 		try {
-			SemanticHelper.init(client);
+			SemanticHelper.getSCCommunityEntityBase(client);
 		} catch (WebApiException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			Thread.currentThread().setContextClassLoader(original);
 		}
@@ -48,6 +53,7 @@ public class ServiceScript {
 			Entity e = SemanticHelper.createEntity(client, actorId, data.getType(), data.getName(), data.getDescription(), convertConcepts(data.getTagList()), data.getRelationList());
 			return Result.newBuilder().setId(e.getId()).setStatus(true).build();
 		} catch (WebApiException e) {
+			logger.error(e);
 			return Result.newBuilder().setStatus(false).build();
 		}
 	}
@@ -57,6 +63,7 @@ public class ServiceScript {
 			Entity e = SemanticHelper.createSCEntity(client, data.getType(), data.getName(), data.getDescription(), convertConcepts(data.getTagList()), data.getRelationList());
 			return Result.newBuilder().setId(e.getId()).setStatus(true).build();
 		} catch (WebApiException e) {
+			logger.error(e);
 			return Result.newBuilder().setStatus(false).build();
 		}
 	}
@@ -81,6 +88,7 @@ public class ServiceScript {
 			SemanticHelper.updateEntity(client, id, data.getName(), data.getDescription(), convertConcepts(data.getTagList()), data.getRelationList());
 			return Result.newBuilder().setId(id).setStatus(true).build();
 		} catch (WebApiException e) {
+			logger.error(e);
 			return Result.newBuilder().setId(id).setStatus(false).build();
 		}
 	}
@@ -89,6 +97,7 @@ public class ServiceScript {
 			boolean result = SemanticHelper.deleteEntity(client, id);
 			return Result.newBuilder().setId(id).setStatus(result).build();
 		} catch (WebApiException e) {
+			logger.error(e);
 			return Result.newBuilder().setId(id).setStatus(false).build();
 		}
 	}
