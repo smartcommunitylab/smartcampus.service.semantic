@@ -29,7 +29,7 @@
                 <configuration>
                     <instructions>
                         <Include-Resource>{maven-resources}</Include-Resource>
-                        <Import-Package>!sun.io.*,!org.apache.xml.*,*</Import-Package>
+                        <Import-Package>!sun.io.*,!org.apache.xml.*,!net.rudp.*,*</Import-Package>
                         <Embed-Dependency>
                         smartcampus-webapi-*,
                         sweb-*,
