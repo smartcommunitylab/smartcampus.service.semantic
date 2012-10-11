@@ -11,7 +11,31 @@
         <version>1.2</version>
     </parent> 
     
-    <dependencies>
+        <dependencies>  
+        <dependency>
+            <groupId>it.sayservice.platform</groupId>
+            <artifactId>service-engine-client</artifactId>
+            <version>${service-engine-client}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hornetq</groupId>
+            <artifactId>hornetq-core-client</artifactId>
+            <version>2.2.5.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hornetq</groupId>
+            <artifactId>hornetq-jms-client</artifactId>
+            <version>2.2.5.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.2.7.Final</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>eu.trentorise.smartcampus</groupId>
             <artifactId>smartcampus.vas.commons</artifactId>
@@ -29,7 +53,7 @@
                 <configuration>
                     <instructions>
                         <Include-Resource>{maven-resources}</Include-Resource>
-                        <Import-Package>!sun.io.*,!org.apache.xml.*,!net.rudp.*,*</Import-Package>
+                        <Import-Package>!sun.io.*,!org.apache.xml.*,!net.rudp.*,!org.junit.*,*</Import-Package>
                         <Embed-Dependency>
                         smartcampus-webapi-*,
                         sweb-*,
