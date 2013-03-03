@@ -55,7 +55,8 @@
                         <Include-Resource>{maven-resources}</Include-Resource>
                         <Import-Package>!sun.io.*,!org.apache.xml.*,!net.rudp.*,!org.junit.*,*</Import-Package>
                         <Embed-Dependency>
-                        smartcampus-webapi-*,
+                        social-webapi-*,
+                        semantic-webapi-*,
                         sweb-*,
                         rudp,
                         json,
